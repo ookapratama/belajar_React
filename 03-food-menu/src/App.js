@@ -1,4 +1,23 @@
 const App = () => {
+  return (
+    <div className="container">
+      <Header />
+      <Menu />
+      <Footer />
+    </div>
+  );
+};
+
+const Header = () => {
+  const style = {};
+  return (
+    <header style={style} className="header">
+      <h1>Mini Project Pizza</h1>
+    </header>
+  );
+};
+
+const Menu = () => {
   const pizzaData = [
     {
       name: "Focaccia",
@@ -44,37 +63,87 @@ const App = () => {
     },
   ];
 
-  // console.log(pizzaData.map((item) => item));
+  // const pizzaData = [];
+
+  const totalPizza = pizzaData.length;
 
   return (
-    <div>
-      <header>
-        <h1>Mini Project Pizza</h1>
-      </header>
-      <Menu />
-      <footer>Copyright By Ookapratama</footer>
-    </div>
-  );
-};
-
-const Menu = () => {
-  return (
-    <div>
+    <main className="menu">
       <h2>Our Menu Pizza</h2>
-      <Content />
-      <Content />
-      <Content />
-    </div>
+
+      {totalPizza > 0 ? (
+        <>
+          <p>
+            Lorem Ipsum is simply dummy text of the printing and typesetting
+            industry. Lorem Ipsum has been the industry's standard dummy text
+            ever since the 1500s.
+          </p>
+          <ul className="pizzas">
+            {pizzaData.map((item) => (
+              <Content dataObj={item} key={item.name} />
+            ))}
+          </ul>
+        </>
+      ) : (
+        <p>Kami sedang memproses Menu. Kembali lagi nanti :)</p>
+      )}
+
+      {/* <Content
+        name="Focaccia"
+        ingredients="Tomato, mozarella, and pepperoni"
+        price={15}
+        photoName="pizzas/salamino.jpg"
+      />
+      <Content
+        name="Pizza Prosciutto"
+        ingredients="Tomato, mozarella, ham, aragula, and burrata cheese"
+        price={18}
+        photoName="pizzas/prosciutto.jpg"
+      /> */}
+    </main>
   );
 };
 
-const Content = () => {
+const Content = ({ dataObj }) => {
+  // console.log(props);
+  console.log(dataObj);
+
+  // if(props.dataObj.soldOut) return <p>Sold Out</p>;
+
   return (
-    <div>
-      <img src="pizzas/prosciutto.jpg" alt="" />
-      <h2>Pizza Prosciutto</h2>
-      <p>Tomato, mozarella, ham, aragula, and burrata cheese</p>
-    </div>
+    <li className={`pizza ${dataObj.soldOut ? "sold-out" : ""}`}>
+      <img src={dataObj.photoName} alt={dataObj.name} />
+      <div>
+        <h3>{dataObj.name}</h3>
+        <p>{dataObj.ingredients}</p>
+        <span>{dataObj.soldOut ? 'Habis banh' : dataObj.price}</span>
+      </div>
+    </li>
+  );
+};
+
+const Footer = () => {
+  const hour = new Date().getHours();
+  const buka = 12;
+  const tutup = 23;
+
+  const statusToko = hour >= buka && hour <= tutup;
+  console.log(hour);
+  console.log(statusToko);
+
+  return (
+    <footer className="footer">
+      {statusToko ? (
+        <div className="order">
+          <p>Kami siap melayani anda sampai pukul {tutup}:00</p>
+          <button className="btn">Order</button>
+        </div>
+      ) : (
+        <p>
+          Kami Akan Buka antara {buka}:00 dan {tutup}:00
+        </p>
+      )}
+    </footer>
   );
 };
 
