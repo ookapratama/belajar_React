@@ -22,8 +22,11 @@ const App = () => {
 
   return (
     <>
-      <button className="close" onClick={() => setOpen((open) =>  !open)}>&times;</button>
-      {isOpen && (
+      <button className="close" onClick={() => setOpen((open) => !open)}>
+        &times;
+      </button>
+
+      {isOpen ? (
         <div className="steps">
           <div className="numbers">
             <div className={step >= 1 ? "active" : ""}>1</div>
@@ -52,6 +55,10 @@ const App = () => {
             </button>
           </div>
         </div>
+      ) : (
+        <>
+          <p className="message">We Are Closed Now!</p>
+        </>
       )}
     </>
   );
