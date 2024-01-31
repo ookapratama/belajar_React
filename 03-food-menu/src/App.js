@@ -9,7 +9,7 @@ const App = () => {
 };
 
 const Header = () => {
-  const style = {};
+  const style = {backgroundColor: 'red'};
   return (
     <header style={style} className="header">
       <h1>Mini Project Pizza</h1>
@@ -88,20 +88,10 @@ const Menu = () => {
         <p>Kami sedang memproses Menu. Kembali lagi nanti :)</p>
       )}
 
-      {/* <Content
-        name="Focaccia"
-        ingredients="Tomato, mozarella, and pepperoni"
-        price={15}
-        photoName="pizzas/salamino.jpg"
-      />
-      <Content
-        name="Pizza Prosciutto"
-        ingredients="Tomato, mozarella, ham, aragula, and burrata cheese"
-        price={18}
-        photoName="pizzas/prosciutto.jpg"
-      /> */}
+      
     </main>
   );
+
 };
 
 const Content = ({ dataObj }) => {
